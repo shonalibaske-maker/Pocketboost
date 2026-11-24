@@ -39,3 +39,7 @@ GitHub Pages documentation: https://docs.github.com/en/pages
 
 ## Important
 This prototype stores no user accounts and sends no data to a server. It does not contain a payment system, AI model, analytics, or advertising. It is a starting point, not a finished commercial product.
+
+
+## Premium content preview
+This update adds a Premium content library with six copyable free previews. Paid unlocking and payment processing are intentionally not enabled yet. Do not advertise these previews as paid access until a secure payment and access-control system has been added and tested.

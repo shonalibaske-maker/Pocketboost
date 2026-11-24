@@ -28,6 +28,21 @@
     button.secondary{background:var(--pale);color:var(--purple);border:1px solid #e1d9ff}
     .result{background:#f8f6ff;border:1px dashed #cfc3ff;border-radius:11px;padding:12px;margin-top:12px;min-height:46px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
     .actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{margin-top:8px}
+
+    .premium-section{margin-top:34px;padding:22px;background:linear-gradient(145deg,#f5f1ff,#fff);border:1px solid #e5dcff;border-radius:22px}
+    .premium-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .premium-heading h2{margin:0 0 4px;font-size:clamp(22px,4vw,30px)}
+    .eyebrow{font-size:11px;letter-spacing:1.5px;font-weight:800;color:var(--purple);margin:0 0 6px}
+    .coming-soon{font-size:10px;letter-spacing:.7px;font-weight:800;background:#eee8ff;color:#5634d5;border-radius:999px;padding:7px 10px}
+    .premium-intro{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--muted);margin:14px 0}
+    .premium-controls{max-width:330px;margin-bottom:15px}
+    .premium-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+    .premium-card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px;display:flex;flex-direction:column;gap:8px}
+    .premium-card h3{font-size:16px;margin:0}.premium-card p{font-size:13px;color:var(--muted);margin:0}
+    .premium-sample{background:#faf8ff;border:1px dashed #d8ceff;border-radius:10px;padding:11px;font-size:13px;white-space:pre-wrap;flex:1}
+    .premium-card button{align-self:flex-start;margin-top:2px}
+    .premium-card .locked-note{font-size:11px;color:#766e8d}
+
     footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
     .small{font-size:12px;color:var(--muted)}
   </style>
@@ -78,6 +93,32 @@
       <div class="actions"><button class="secondary" onclick="copyResult('messageOut')">Copy message</button></div>
     </section>
   </div>
+
+  <section class="premium-section" id="premium">
+    <div class="premium-heading">
+      <div>
+        <p class="eyebrow">POCKETBOOST PLUS</p>
+        <h2>Premium content library</h2>
+        <p class="desc">Ready-to-customise ideas for your next post, offer or launch.</p>
+      </div>
+      <span class="coming-soon">PREMIUM · COMING SOON</span>
+    </div>
+    <div class="premium-intro">
+      <strong>Start with the free previews.</strong> Explore the packs below. Paid unlocking is not active yet, so nobody will be charged in this test version.
+    </div>
+    <div class="premium-controls">
+      <label for="premiumCategory">Choose a business type</label>
+      <select id="premiumCategory" onchange="showPremiumPack()">
+        <option value="all">All business types</option>
+        <option value="beauty">Beauty & wellness</option>
+        <option value="food">Food & cafés</option>
+        <option value="fashion">Fashion & boutiques</option>
+        <option value="general">Any small business</option>
+      </select>
+    </div>
+    <div class="premium-grid" id="premiumGrid" aria-live="polite"></div>
+  </section>
+
   <p class="small" style="margin-top:18px">PocketBoost provides general planning tools, not accounting, tax or financial advice. Check your numbers before making business decisions.</p>
 </main>
 <footer>© <span id="year"></span> PocketBoost · Built for learning and testing</footer>
@@ -112,6 +153,27 @@ async function copyResult(id){
  try{await navigator.clipboard.writeText(text);alert('Copied!');}
  catch(e){alert('Copy is unavailable in this browser. Please select and copy the text.');}
 }
+
+const premiumPacks = [
+ {cat:'beauty',name:'Beauty & wellness captions',desc:'Soft, confident copy for services and self-care products.',sample:'Your little reminder to make time for you. ✨ Discover a feel-good favourite, thoughtfully chosen with your routine in mind.'},
+ {cat:'food',name:'Food & café captions',desc:'Tempting words for menus, treats and local cafés.',sample:'Good food, lovely moments. 🍰 Your next delicious stop is waiting — bring a friend and make it a date!'},
+ {cat:'fashion',name:'Fashion & boutique captions',desc:'Style-led ideas for new arrivals and outfit drops.',sample:'A fresh look for your everyday story. Find the piece that feels like you and make it yours. 🤍'},
+ {cat:'general',name:'Product launch mini-pack',desc:'A simple launch announcement for almost any small business.',sample:'It’s finally here! We’re excited to introduce something special. Take a first look, tell us what you think and message us with any questions.'},
+ {cat:'general',name:'Weekend offer messages',desc:'Friendly promotional copy for a limited-time offer.',sample:'A little weekend treat from us to you! Enjoy our special offer while it lasts. Send us a message to know more.'},
+ {cat:'general',name:'Customer thank-you notes',desc:'Warm follow-ups that help customers feel appreciated.',sample:'Thank you for choosing our small business. Your support means so much to us — we hope you love your purchase! 💜'}
+];
+function showPremiumPack(){
+ const selected=$('premiumCategory').value;
+ const visible=premiumPacks.filter(p=>selected==='all'||p.cat===selected||p.cat==='general');
+ $('premiumGrid').innerHTML=visible.map((p,i)=>`<article class="premium-card"><h3>${p.name}</h3><p>${p.desc}</p><div class="premium-sample">${p.sample}</div><button class="secondary" type="button" onclick="copyPremium(${premiumPacks.indexOf(p)})">Copy free preview</button><span class="locked-note">Full pack: coming soon · no payment enabled</span></article>`).join('');
+}
+async function copyPremium(i){
+ const text=premiumPacks[i].sample;
+ try{await navigator.clipboard.writeText(text);alert('Preview copied!');}
+ catch(e){alert('Copy is unavailable here. Please select and copy the preview.');}
+}
+
+showPremiumPack();
 $('year').textContent=new Date().getFullYear();
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
