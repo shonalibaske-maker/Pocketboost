@@ -1,0 +1,17 @@
+{
+  "name": "PocketBoost \u2014 Simple business tools",
+  "short_name": "PocketBoost",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbfaff",
+  "theme_color": "#6d4aff",
+  "description": "Free marketing and money tools for small businesses and creators.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

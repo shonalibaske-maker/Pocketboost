@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d4aff">
+  <meta name="description" content="Simple free marketing tools for small businesses and creators.">
+  <title>PocketBoost — Simple business tools</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <style>
+    :root{--ink:#211d35;--muted:#6d6880;--purple:#6d4aff;--pale:#f4f1ff;--line:#e9e5f2;--bg:#fbfaff}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+    header{background:linear-gradient(135deg,#6d4aff,#9a73ff);color:white;padding:28px 18px 34px}
+    .wrap{max-width:900px;margin:auto;padding:0 16px}
+    .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+    .brand{font-weight:800;letter-spacing:.2px;font-size:20px}.tag{font-size:13px;opacity:.9}
+    h1{font-size:clamp(28px,5vw,42px);line-height:1.1;margin:28px 0 10px}
+    header p{margin:0;max-width:570px;opacity:.94}
+    main{padding:22px 0 48px}.notice{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;color:var(--muted);font-size:14px;margin-bottom:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+    .card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 18px #38236b0a}
+    .card h2{font-size:18px;margin:0 0 5px}.desc{color:var(--muted);font-size:13px;margin:0 0 14px}
+    label{display:block;font-size:13px;font-weight:650;margin:12px 0 5px}
+    input,select,textarea{width:100%;border:1px solid #dcd6e9;border-radius:10px;padding:11px 12px;font:inherit;background:white;color:var(--ink)}
+    textarea{min-height:92px;resize:vertical}
+    button{border:0;border-radius:11px;background:var(--purple);color:white;font-weight:700;padding:11px 15px;cursor:pointer;margin-top:12px}
+    button.secondary{background:var(--pale);color:var(--purple);border:1px solid #e1d9ff}
+    .result{background:#f8f6ff;border:1px dashed #cfc3ff;border-radius:11px;padding:12px;margin-top:12px;min-height:46px;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{margin-top:8px}
+    footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+    .small{font-size:12px;color:var(--muted)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="top"><div class="brand">✦ PocketBoost</div><div class="tag">Simple tools. Smarter business.</div></div>
+    <h1>Make your next business move easier.</h1>
+    <p>Free, practical marketing and money tools for small businesses, creators and side hustlers.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="notice">Welcome to the first PocketBoost test version. These tools work in your browser; no account or payment is needed.</div>
+  <div class="grid">
+    <section class="card">
+      <h2>✍️ Caption starter</h2><p class="desc">Create a simple promotional caption.</p>
+      <label for="product">What are you promoting?</label><input id="product" placeholder="e.g. handmade candles">
+      <label for="audience">Who is it for?</label><input id="audience" placeholder="e.g. home decor lovers">
+      <label for="tone">Choose a tone</label><select id="tone"><option>Friendly</option><option>Premium</option><option>Fun</option><option>Urgent</option></select>
+      <button onclick="makeCaption()">Generate caption</button><div id="captionOut" class="result" aria-live="polite">Your caption will appear here.</div>
+      <div class="actions"><button class="secondary" onclick="copyResult('captionOut')">Copy caption</button></div>
+    </section>
+    <section class="card">
+      <h2># Hashtag ideas</h2><p class="desc">Get starter hashtags for your business category.</p>
+      <label for="category">Business category</label><select id="category"><option value="food">Food</option><option value="fashion">Fashion</option><option value="beauty">Beauty</option><option value="fitness">Fitness</option><option value="home">Home decor</option><option value="general">Other small business</option></select>
+      <button onclick="makeTags()">Suggest hashtags</button><div id="tagsOut" class="result" aria-live="polite">Your hashtag ideas will appear here.</div>
+      <div class="actions"><button class="secondary" onclick="copyResult('tagsOut')">Copy hashtags</button></div>
+    </section>
+    <section class="card">
+      <h2>％ Discount calculator</h2><p class="desc">Find the sale price after a discount.</p>
+      <label for="price">Original price (₹)</label><input id="price" type="number" min="0" step="0.01" placeholder="1000">
+      <label for="discount">Discount (%)</label><input id="discount" type="number" min="0" max="100" step="0.1" placeholder="20">
+      <button onclick="discountCalc()">Calculate sale price</button><div id="discountOut" class="result" aria-live="polite">Your result will appear here.</div>
+    </section>
+    <section class="card">
+      <h2>₹ Profit calculator</h2><p class="desc">Estimate profit and profit margin per item.</p>
+      <label for="cost">Your total cost per item (₹)</label><input id="cost" type="number" min="0" step="0.01" placeholder="250">
+      <label for="selling">Selling price (₹)</label><input id="selling" type="number" min="0" step="0.01" placeholder="400">
+      <button onclick="profitCalc()">Calculate profit</button><div id="profitOut" class="result" aria-live="polite">Your result will appear here.</div>
+    </section>
+    <section class="card">
+      <h2>💬 WhatsApp promo writer</h2><p class="desc">Draft a short offer message to edit and send.</p>
+      <label for="offer">What is the offer?</label><input id="offer" placeholder="e.g. 15% off this weekend">
+      <label for="business">Business name</label><input id="business" placeholder="e.g. Mira Boutique">
+      <label for="contact">Call to action</label><input id="contact" placeholder="e.g. Reply YES to order">
+      <button onclick="makeMessage()">Write message</button><div id="messageOut" class="result" aria-live="polite">Your message will appear here.</div>
+      <div class="actions"><button class="secondary" onclick="copyResult('messageOut')">Copy message</button></div>
+    </section>
+  </div>
+  <p class="small" style="margin-top:18px">PocketBoost provides general planning tools, not accounting, tax or financial advice. Check your numbers before making business decisions.</p>
+</main>
+<footer>© <span id="year"></span> PocketBoost · Built for learning and testing</footer>
+<script>
+const $ = id => document.getElementById(id);
+const money = n => new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(n);
+function makeCaption(){
+  const p=$('product').value.trim()||'our latest product', a=$('audience').value.trim()||'you', t=$('tone').value;
+  const starts={Friendly:'A little something to brighten your day!',Premium:'Thoughtfully made, beautifully presented.',Fun:'Your next favourite is calling!',Urgent:'A special offer you won’t want to miss!'};
+  $('captionOut').textContent=`${starts[t]} Meet ${p} — made with ${a} in mind. Discover it today and tell us what you think! ✨`;
+}
+const tags={food:'#FoodLovers #FoodieFinds #LocalEats #FreshAndTasty #SmallFoodBusiness',fashion:'#StyleInspiration #FashionFinds #OOTD #EverydayStyle #BoutiqueLove',beauty:'#BeautyRoutine #GlowUp #SelfCare #BeautyLovers #BeautyBusiness',fitness:'#FitnessJourney #HealthyHabits #WorkoutMotivation #ActiveLifestyle #FitnessCommunity',home:'#HomeDecorIdeas #InteriorInspiration #CozyHome #DecorLovers #SmallBusiness',general:'#ShopSmall #SupportLocal #SmallBusinessLove #MadeWithCare #DiscoverMore'};
+function makeTags(){$('tagsOut').textContent=tags[$('category').value];}
+function number(id){return Number($(id).value);}
+function discountCalc(){
+ const p=number('price'),d=number('discount');
+ if($('price').value===''||$('discount').value===''||p<0||d<0||d>100){$('discountOut').textContent='Enter a price of 0 or more and a discount between 0 and 100.';return;}
+ $('discountOut').textContent=`You save ${money(p*d/100)}.\nSale price: ${money(p*(1-d/100))}`;
+}
+function profitCalc(){
+ const c=number('cost'),s=number('selling');
+ if($('cost').value===''||$('selling').value===''||c<0||s<0){$('profitOut').textContent='Enter valid non-negative cost and selling price values.';return;}
+ const p=s-c, m=s===0?0:p/s*100;
+ $('profitOut').textContent=`Profit per item: ${money(p)}\nProfit margin: ${m.toFixed(1)}%`;
+}
+function makeMessage(){
+ const o=$('offer').value.trim()||'a special offer', b=$('business').value.trim()||'Our store', c=$('contact').value.trim()||'Message us to know more';
+ $('messageOut').textContent=`Hello! 👋\n${b} has ${o} for you.\nDon’t miss out — we’d love to help you!\n${c}`;
+}
+async function copyResult(id){
+ const text=$(id).textContent;
+ try{await navigator.clipboard.writeText(text);alert('Copied!');}
+ catch(e){alert('Copy is unavailable in this browser. Please select and copy the text.');}
+}
+$('year').textContent=new Date().getFullYear();
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
+</body>
+</html>
