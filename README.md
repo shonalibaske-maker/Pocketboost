@@ -43,3 +43,7 @@ This prototype stores no user accounts and sends no data to a server. It does no
 
 ## Premium content preview
 This update adds a Premium content library with six copyable free previews. Paid unlocking and payment processing are intentionally not enabled yet. Do not advertise these previews as paid access until a secure payment and access-control system has been added and tested.
+
+
+## Premium content preview
+The current prototype includes a 100-caption preview library (25 each for beauty & wellness, food & cafes, fashion & boutiques, and general small businesses). Copy buttons work in supported browsers. The content is currently visible to all visitors; paid access and payment processing are not enabled.

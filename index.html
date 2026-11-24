@@ -119,6 +119,25 @@
     <div class="premium-grid" id="premiumGrid" aria-live="polite"></div>
   </section>
 
+
+  <section class="premium-section" id="captionVault">
+    <div class="premium-heading">
+      <div><p class="eyebrow">100+ READY-TO-EDIT IDEAS</p><h2>Caption Vault</h2><p class="desc">Browse captions by business type and copy the ones you like.</p></div>
+      <span class="coming-soon">PREVIEW LIBRARY</span>
+    </div>
+    <div class="premium-controls">
+      <label for="captionCategory">Choose a caption collection</label>
+      <select id="captionCategory" onchange="showCaptionVault()">
+        <option value="beauty">Beauty & wellness · 25 captions</option>
+        <option value="food">Food & cafés · 25 captions</option>
+        <option value="fashion">Fashion & boutiques · 25 captions</option>
+        <option value="general">Any small business · 25 captions</option>
+      </select>
+    </div>
+    <p class="small" id="captionCount" aria-live="polite">25 captions in this collection.</p>
+    <div class="premium-grid" id="captionVaultGrid" aria-live="polite"></div>
+  </section>
+
   <p class="small" style="margin-top:18px">PocketBoost provides general planning tools, not accounting, tax or financial advice. Check your numbers before making business decisions.</p>
 </main>
 <footer>© <span id="year"></span> PocketBoost · Built for learning and testing</footer>
@@ -173,7 +192,151 @@ async function copyPremium(i){
  catch(e){alert('Copy is unavailable here. Please select and copy the preview.');}
 }
 
+
+const captionVault = {
+beauty: [
+`A little time for yourself can change the whole day. Make room for a feel-good moment. ✨`,
+`Your glow, your pace, your kind of self-care. We’re here to make your routine feel special.`,
+`Small rituals. Lovely results. Discover a little something to brighten your self-care routine.`,
+`Because taking care of you is always worth it. Save this as your reminder to slow down. 💗`,
+`Fresh appointment slots are open! Message us and let’s plan a little time just for you.`,
+`A calm moment, a fresh feeling, and a little extra confidence. That’s the kind of reset we love.`,
+`Your next self-care favourite might be right here. Explore the collection and find your match.`,
+`A little care goes a long way. Thank you for letting us be part of your routine.`,
+`Feeling good starts with making time for yourself. Consider this your sign to book that visit.`,
+`Soft moments and thoughtful care — because you deserve both. Bookings are now open.`,
+`A fresh week is a lovely reason to refresh your routine. What are you treating yourself to?`,
+`Your beauty routine should feel like you. Choose what makes you feel comfortable and confident.`,
+`A little behind-the-scenes look at the care we put into every detail. Thank you for being here!`,
+`Need a moment to reset? We’d love to welcome you. Send us a message for available times.`,
+`Confidence looks different on everyone. We’re here to help you celebrate your own version.`,
+`Your kind words make our day. Thank you for supporting our small beauty business.`,
+`Thoughtful details, a welcoming space, and care that puts you first. That’s our promise.`,
+`Make your next appointment something to look forward to. Get in touch and reserve your spot.`,
+`A fresh little pick-me-up for your week. Explore our services and find what feels right for you.`,
+`Self-care isn’t selfish. It’s a lovely way to pause, recharge, and show yourself some kindness.`,
+`We love helping you feel your best, one visit at a time. Thanks for choosing us.`,
+`Your next feel-good moment is just a message away. Ask us about this week’s availability.`,
+`A simple routine, a little consistency, and care that feels good. Start where you are.`,
+`Today’s reminder: you don’t need a special occasion to do something kind for yourself.`,
+`A big thank-you to everyone who books, shares, recommends, and supports our little business. 💕`,
+`A little pause, a deep breath, and care that feels like you. Make today your reset.`,
+`We believe the best beauty routine is one that makes you feel comfortable in your own skin.`,
+`Your next appointment can be the best part of your week. Reach out to reserve a time.`,
+`Behind every detail is a team that cares. Thanks for trusting us with your self-care moments.`,
+`Choose a moment for yourself today. You deserve care that feels thoughtful and unhurried.`
+],
+food: [
+`Good food has a way of making an ordinary day feel special. What are you craving today? 🍴`,
+`Freshly made and ready to make your day a little tastier. Drop by and say hello!`,
+`Your next delicious moment is waiting. Bring a friend and make it a food date.`,
+`A little treat can turn the whole day around. What would you choose from our menu?`,
+`Made with care and served with a smile. Thank you for making us part of your day.`,
+`If you needed a sign to order something delicious, this is it. Message us to place your order!`,
+`Good things are on the menu today. Come hungry, leave happy. 😋`,
+`Weekend plans? We have a tasty idea. Visit us or send a message to know today’s specials.`,
+`The best conversations often happen around good food. Tag the person you’d bring along.`,
+`A little peek at what’s cooking today. Which item should we feature next?`,
+`Your favourite comfort flavours, made fresh and ready to enjoy. We can’t wait to serve you.`,
+`From our kitchen to your table, every order means a lot to our small business. Thank you!`,
+`Need a midweek pick-me-up? Let something delicious be the highlight of your day.`,
+`Gather your people, pick your favourites, and let us take care of the food.`,
+`Cravings called — we answered. Send us a message for the menu and ordering details.`,
+`A fresh batch, a happy kitchen, and lots of love in every order. That’s today’s mood.`,
+`Save this for your next café stop. We’d love to see you soon! ☕`,
+`Little bites, big smiles. What’s your must-have when you visit us?`,
+`Your lunch break deserves something lovely. Stop by and make it a tasty one.`,
+`Made for sharing… unless you decide not to. We won’t judge. 😉`,
+`Thank you for choosing local and supporting our team. Every visit keeps us going.`,
+`A table, your favourite people, and something delicious — sounds like a good plan to us.`,
+`Today’s special is ready for its close-up. Ask us what’s available before it’s gone.`,
+`Order ahead, pick up, and enjoy. Message us and we’ll help make it easy.`,
+`Good food brings people together. Thanks for letting us be part of your moments. ❤️`,
+`Fresh flavours and good company — two of our favourite ingredients. Who’s joining you?`,
+`A little something delicious can make any day better. Check out what’s available today.`,
+`We’re prepping your favourites with care. Message us early to place your order.`,
+`Every plate has a story, and we’re glad you’re part of ours. Thanks for stopping by.`,
+`Make room for one more bite. Your next tasty visit is waiting!`
+],
+fashion: [
+`A new favourite might be waiting for you. Find the piece that feels like your kind of style.`,
+`Easy to wear, lovely to style, and ready for your everyday plans. Which look is your pick?`,
+`Your wardrobe called — it’s ready for something fresh. Explore our latest arrivals.`,
+`Style is personal. Choose the pieces that make you feel most like yourself. 🤍`,
+`A little outfit inspiration for your next plan. Save this look for later!`,
+`New pieces, fresh possibilities. Message us for sizes, colours, and availability.`,
+`The details make the outfit. Take a closer look at what just arrived.`,
+`From everyday plans to special moments, find a look that feels just right.`,
+`Consider this your sign to refresh your favourite outfit rotation.`,
+`One piece, so many ways to style it. How would you wear this?`,
+`Your next outfit moment starts here. Browse the collection and pick your favourite.`,
+`Comfort meets confidence in pieces made to fit your everyday.`,
+`A fresh drop for your personal style story. Which item caught your eye first?`,
+`Good style doesn’t need to be complicated. Start with a piece you truly love.`,
+`A little something for your next occasion — or simply because you feel like it.`,
+`We’ve been waiting to show you this one. Meet a new favourite from our collection.`,
+`Your style, your rules. Mix it, match it, and make it yours.`,
+`The perfect finishing touch can change everything. Explore the latest accessories.`,
+`A closet refresh can start with one great find. What are you shopping for today?`,
+`New season, new combinations, same you. Let’s find your next go-to look.`,
+`A closer look at the fit, feel, and little details. Send us a message with your questions.`,
+`Your kind of everyday style, picked with care. Thanks for shopping with our boutique.`,
+`Which colour would you choose? Tell us below — we love hearing your style opinions.`,
+`A lovely find deserves a place in your wardrobe. Check availability before ordering.`,
+`Thank you for every order, tag, share, and kind word. You keep our little boutique moving. 💫`,
+`A piece you’ll reach for again and again. Find your new everyday favourite with us.`,
+`Wear what makes you feel good. That’s always the best look.`,
+`A little inspiration for your next look, picked with care for your wardrobe.`,
+`Love this style? Send us a message and we’ll help you check the details.`,
+`Thanks for making our boutique part of your style story. We appreciate every visit.`
+],
+general: [
+`Small business, big heart. Thank you for being part of our journey. 💜`,
+`Thoughtfully made and shared with care. Discover what we’ve been working on.`,
+`A little update from our team: something lovely is ready for you. Take a look!`,
+`Your support helps our small business grow, one order and one recommendation at a time.`,
+`Looking for something useful and thoughtfully chosen? Explore our latest collection.`,
+`We’re happy you’re here. Tell us what you’re looking for and we’ll help you find it.`,
+`A fresh week brings fresh ideas. Here’s what we’re excited to share with you.`,
+`Made for real people and everyday moments. Take a look and tell us what you think.`,
+`A little thank-you for choosing to shop small. Your support means more than you know.`,
+`Have a question before ordering? Send us a message — we’re always glad to help.`,
+`New here? Welcome! Follow along for updates, helpful tips, and a closer look at what we do.`,
+`We put care into the details so you can enjoy the little things. Explore more today.`,
+`Your feedback helps us do better. If you’ve tried us, we’d love to hear from you.`,
+`A good day to support a local business — and we’d be grateful if you chose ours.`,
+`Something new is on the way. Keep an eye here so you don’t miss the update!`,
+`Behind every small business is a lot of care, hard work, and people like you. Thank you.`,
+`Need help choosing? Tell us what you have in mind and we’ll point you in the right direction.`,
+`A simple way to make someone’s day: share a business you love. Thanks for sharing ours.`,
+`We’re growing one happy customer at a time. Thanks for being part of the story.`,
+`Your next favourite could be closer than you think. Explore our page and say hello.`,
+`A little reminder that every order, message, and recommendation makes a difference.`,
+`We love seeing how you use and enjoy what we create. Tag us so we can celebrate with you!`,
+`Have a special request? Reach out and let’s see how we can help.`,
+`Good things take care and time. We’re proud to share a little more of our work with you.`,
+`Thank you for choosing us today. We hope to welcome you back soon! ✨`,
+`We’re a small team with a big appreciation for every customer. Thanks for choosing us.`,
+`Have an idea or a question? We’d love to hear from you — send us a quick message.`,
+`Every share helps someone discover a small business. Thank you for spreading the word.`,
+`We’re always working on ways to make your experience better. Your feedback helps us grow.`,
+`A heartfelt thank-you for being here, supporting our work, and cheering us on.`
+]};
+function showCaptionVault(){
+ const category=$('captionCategory').value;
+ const captions=captionVault[category]||[];
+ $('captionCount').textContent=`${captions.length} captions in this collection.`;
+ $('captionVaultGrid').innerHTML=captions.map((caption,i)=>`<article class="premium-card"><h3>Caption ${i+1}</h3><div class="premium-sample">${caption}</div><button class="secondary" type="button" onclick="copyVaultCaption(${i})">Copy caption</button></article>`).join('');
+}
+async function copyVaultCaption(i){
+ const category=$('captionCategory').value;
+ const value=captionVault[category][i];
+ try{await navigator.clipboard.writeText(value);alert('Caption copied!');}
+ catch(e){alert('Copy is unavailable here. Please select and copy the caption.');}
+}
+
 showPremiumPack();
+showCaptionVault();
 $('year').textContent=new Date().getFullYear();
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
