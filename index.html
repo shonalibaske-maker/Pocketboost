@@ -339,6 +339,46 @@ showPremiumPack();
 showCaptionVault();
 $('year').textContent=new Date().getFullYear();
 if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
-</script>
+</script> 
+
+  
+<section id="shop-smart" style="padding:40px 20px;text-align:center;background:#fff8f5;">
+  <h2 style="font-size:30px;color:#222;">🛍️ PocketBoost Shop Smart</h2>
+  <p>Discover exciting finds for your everyday life!</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;max-width:850px;margin:30px auto;">
+
+    <div style="padding:25px;background:#fff0f3;border-radius:16px;">
+      <div style="font-size:38px;">💄</div>
+      <h3>Beauty Finds</h3>
+      <p>Beauty and skincare discoveries.</p>
+    </div>
+
+    <div style="padding:25px;background:#f0f4ff;border-radius:16px;">
+      <div style="font-size:38px;">👗</div>
+      <h3>Fashion Finds</h3>
+      <p>Style and everyday accessories.</p>
+    </div>
+
+    <div style="padding:25px;background:#f1fff2;border-radius:16px;">
+      <div style="font-size:38px;">🏡</div>
+      <h3>Home Essentials</h3>
+      <p>Useful finds for your home.</p>
+    </div>
+
+    <div style="padding:25px;background:#fff7e8;border-radius:16px;">
+      <div style="font-size:38px;">🎧</div>
+      <h3>Tech Finds</h3>
+      <p>Gadgets and smart accessories.</p>
+    </div>
+
+  </div>
+
+  <p style="color:#777;font-size:13px;">
+    Exciting product recommendations coming soon!
+  </p>
+</section>
+
+  
 </body>
 </html>
